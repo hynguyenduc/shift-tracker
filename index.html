@@ -1,1 +1,32 @@
-"hello there"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color">
+    <title>Shifty Tracker</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>Shift Tracker</h1>
+    <script>
+        window.addEventListener('load', function() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('/sw.js')
+                    .then((registration) => {
+                        registration.addEventListener('updatefound', () => {
+                            const installingWorker = registration.installing
+                            console.log('New service worker being installed:', installingWorker)
+                        })
+                    })
+                    .catch((error) => {
+                        console.error('Service worker registration failed: ${error}')
+                    })
+            } else {
+                console.error('Service workers are not supported')
+            }
+                })
+    </script>
+</body>
+</html>
