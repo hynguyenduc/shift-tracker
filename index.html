@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color">
+    <meta name="theme-color" content="#185FA5">
+    <meta name="description" content="Tracks work shifts and pay">
     <title>Shifty Tracker</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="./resources/tung-192.webp">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Shift Tracker</h1>
+    <header>
+        <h1>Shift Tracker</h1>
+    </header>
+    <main>
+        <section id="active-view">
+            <p>shifts will show here</p>
+        </section>
+        <section id="history-view">
+            <p>paid shifts will show here</p>
+        </section>
+    </main>
+    <nav>
+        <button data-tab="active"> Active </button>
+        <button data-tab="history"> History </button>
+    </nav>
+    <script src="app.js"></script>
     <script>
         window.addEventListener('load', function() {
             if ('serviceWorker' in navigator) {
@@ -22,7 +39,7 @@
                         })
                     })
                     .catch((error) => {
-                        console.error('Service worker registration failed: ${error}')
+                        console.error(`Service worker registration failed: ${error}`)
                     })
             } else {
                 console.error('Service workers are not supported')
