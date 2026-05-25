@@ -8,5 +8,15 @@ function switchTab(tabName) {
     tabButtons.forEach(function(button) {
         button.classList.remove('tab-active')
     })
+    document.querySelector('#' + tabName + '-view').classList.remove('hidden')
+    
+    document.querySelector('[data-tab="' + tabName + '"]').classList.add('tab-active')
 }
 
+tabButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        switchTab(button.getAttribute('data-tab'))
+    })
+})
+
+switchTab('active')
