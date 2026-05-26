@@ -6,7 +6,7 @@ const monthNames = [
   'September', 'October', 'November', 'December'
 ]
 const dayNames = [
-    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+    'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
 ]
 let currentMonth = new Date().getMonth()
 let currentYear = new Date().getFullYear()
@@ -22,9 +22,8 @@ function switchTab(tabName) {
     document.querySelector('#' + tabName + '-view').classList.remove('hidden')
     document.querySelector('[data-tab="' + tabName + '"]').classList.add('tab-active')
 }
-
 function renderCalendar() {
-    let firstDay = new Date(currentYear, currentMonth, 1).getDay()
+    let firstDay = (new Date(currentYear, currentMonth, 1).getDay() + 6) %7
     let totalDays = new Date(currentYear, currentMonth+1, 0).getDate()
     let monthLabel = monthNames[currentMonth] + ' ' + currentYear
 
@@ -55,7 +54,6 @@ tabButtons.forEach(function(button) {
         switchTab(button.getAttribute('data-tab'))
     })
 })
-
 document.getElementById('prev-button').addEventListener('click', function() {
     currentMonth--
     if (currentMonth < 0 ) {
