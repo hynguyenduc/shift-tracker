@@ -23,6 +23,7 @@ function switchTab(tabName) {
     document.querySelector('[data-tab="' + tabName + '"]').classList.add('tab-active')
 }
 function renderCalendar() {
+    const today = new Date()
     let firstDay = (new Date(currentYear, currentMonth, 1).getDay() + 6) %7
     let totalDays = new Date(currentYear, currentMonth+1, 0).getDate()
     let monthLabel = monthNames[currentMonth] + ' ' + currentYear
@@ -46,6 +47,9 @@ function renderCalendar() {
         dayNumbered.classList.add('day-cell')
         dayNumbered.textContent = i
         document.getElementById('cal-grid').appendChild(dayNumbered)
+        if (today.getDate() === i && today.getMonth() === currentMonth && today.getFullYear() === currentYear) {
+            dayNumbered.classList.add('today')
+        }
     }
 }
 
