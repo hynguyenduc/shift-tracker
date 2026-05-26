@@ -22,6 +22,14 @@ function switchTab(tabName) {
     document.querySelector('#' + tabName + '-view').classList.remove('hidden')
     document.querySelector('[data-tab="' + tabName + '"]').classList.add('tab-active')
 }
+
+function setAppHeight() {
+    document.documentElement.style.setProperty(
+        '--app-height',
+        `${window.innerHeight}px`
+    );
+}
+
 function renderCalendar() {
     const today = new Date()
     let firstDay = (new Date(currentYear, currentMonth, 1).getDay() + 6) %7
@@ -53,6 +61,9 @@ function renderCalendar() {
     }
 }
 
+window.addEventListener('resize', setAppHeight);
+window.addEventListener('orientationchange', setAppHeight);
+
 tabButtons.forEach(function(button) {
     button.addEventListener('click', function() {
         switchTab(button.getAttribute('data-tab'))
@@ -75,5 +86,6 @@ document.getElementById('next-button').addEventListener('click', function() {
     renderCalendar()
 })
 
+setAppHeight()
 switchTab('active')
 renderCalendar()
