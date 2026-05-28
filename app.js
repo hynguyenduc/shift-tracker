@@ -10,6 +10,15 @@ const dayNames = [
 ]
 let currentMonth = new Date().getMonth()
 let currentYear = new Date().getFullYear()
+let shifts = []
+let employers = []
+
+function setAppHeight() {
+    document.documentElement.style.setProperty(
+        '--app-height',
+        `${window.innerHeight}px`
+    );
+}
 
 function switchTab(tabName) {
     tabSections.forEach(function(section) {
@@ -21,13 +30,6 @@ function switchTab(tabName) {
     
     document.querySelector('#' + tabName + '-view').classList.remove('hidden')
     document.querySelector('[data-tab="' + tabName + '"]').classList.add('tab-active')
-}
-
-function setAppHeight() {
-    document.documentElement.style.setProperty(
-        '--app-height',
-        `${window.innerHeight}px`
-    );
 }
 
 function renderCalendar() {
@@ -60,6 +62,38 @@ function renderCalendar() {
         }
     }
 }
+function loadShifts() {
+    const shiftCheck = localStorage.getItem('shifts')
+    if (shiftCheck != null ) {
+       shifts = JSON.parse(shiftCheck)
+    }
+}
+function saveShifts() {
+    localStorage.setItem('shifts', JSON.stringify(shifts))
+}
+function loadEmployers() {
+    const employerCheck = localStorage.getItem('employers')
+    if (employerCheck) {
+       employers = JSON.parse(employerCheck)
+    }
+}
+function saveEmployers() {
+    localStorage.setItem('employers', JSON.stringify(employers))
+}
+function getNextShiftId() {
+    if (shifts.length === 0) {
+        return 1
+    } else {
+        return Math.max(...shifts.map(shift => shift.id)) + 1
+    }
+}
+function getNextEmployerId() {
+    if (employers.length === 0) {
+        return 1
+    } else {
+        return Math.max(...employers.map(employer => employer.id)) + 1
+    }
+}
 
 window.addEventListener('resize', setAppHeight);
 window.addEventListener('orientationchange', setAppHeight);
@@ -87,5 +121,8 @@ document.getElementById('next-button').addEventListener('click', function() {
 })
 
 setAppHeight()
+// load the data first
+loadShifts() 
+loadEmployers()
 switchTab('active')
 renderCalendar()
