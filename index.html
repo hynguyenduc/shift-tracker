@@ -33,6 +33,77 @@
         <button data-tab="active"> Active </button>
         <button data-tab="history"> History </button>
     </nav>
+    <div id="sheet-overlay">
+        <div id="shift-sheet">
+            <div class="sheet-header">
+                <h2 id="sheet-title">Add Shift</h2>
+                <button id="close-sheet">✕</button>
+            </div>
+            <form id="shift-form">
+                <div class="form-field">
+                    <label for="shift-name">Shift name</label>
+                    <input type="text" id="shift-name" placeholder="e.g. Morning Shift">
+                </div>
+                <div class="form-field">
+                    <label for="shift-date">Date worked</label>
+                    <input type="date" id="shift-date">
+                </div>
+                <div class="form-field">
+                    <label for="shift-hours">Hours worked</label>
+                    <input type="number" id="shift-hours" placeholder="e.g. 8" min="0" step="0.5">
+                </div>
+                <div class="form-field">
+                    <label for="shift-rate">Hourly rate ($)</label>
+                    <input type="number" id="shift-rate" placeholder="e.g. 25" min="0" step="0.01">
+                </div>
+                <div class="form-field">
+                    <label>Rate Types</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="rate-type" value="standard" checked>Standard
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="rate-type" value="saturday">Saturday (x1.25)
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="rate-type" value="sunday">Sunday (x1.50)
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="rate-type" value="publicHoliday">Public Holiday (x2.25)
+                        </label>
+                    </div>
+                    <div id="ph-options" class="hidden">
+                        <div class="form-field">
+                            <label class="radio-option">
+                                <input type="checkbox" id="ph-allday">
+                                All day public holiday rate
+                            </label>
+                        </div>
+                        <div class="form-field" id="ph-hours-field">
+                            <label for="ph-hours">Hours at public holiday rates</label>
+                            <input type="number" id="ph-hours" placeholder="e.g. 3" min="0" step="0.5">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label class="radio-option">
+                        <input type="checkbox" id="shift-locum">
+                        Locum shift
+                    </label>
+                </div>
+                <div class="form-field">
+                    <label for="shift-employer">Employer</label>
+                    <select id="shift-employer">
+                        <option value="">None</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" id="save-shift">Save Shift</button>
+                    <button type="button" id="delete-shift" class="hidden">Delete Shift</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="app.js"></script>
     <script>
         window.addEventListener('load', function() {

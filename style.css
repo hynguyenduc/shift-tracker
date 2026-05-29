@@ -52,6 +52,11 @@ nav button.tab-active {
     margin-top: -1px;
 }
 
+#cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
 .hidden {
     display: none;
 }
@@ -60,7 +65,91 @@ nav button.tab-active {
     background-color: aquamarine;
 }
 
-#cal-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+#sheet-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    align-items:flex-end;
+}
+
+#sheet-overlay.open {
+    display: flex;
+}
+
+#shift-sheet {
+    background: white;
+    width:100%;
+    border-radius: 16px 16px 0 0;
+    padding: 16px;
+    max-height: 90dvh;
+    overflow-y: auto;
+}
+
+.sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  font-size: 13px;
+  color: #666;
+}
+
+.form-field input,
+.form-field select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+#save-shift {
+  flex: 1;
+  padding: 12px;
+  background-color: #185FA5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#delete-shift {
+  padding: 12px 16px;
+  background-color: white;
+  color: #e53935;
+  border: 1px solid #e53935;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }

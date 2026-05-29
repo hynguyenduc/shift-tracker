@@ -13,6 +13,7 @@ let currentYear = new Date().getFullYear()
 let shifts = []
 let employers = []
 
+
 function setAppHeight() {
     document.documentElement.style.setProperty(
         '--app-height',
@@ -94,6 +95,22 @@ function getNextEmployerId() {
         return Math.max(...employers.map(employer => employer.id)) + 1
     }
 }
+function openSheet() {
+    document.getElementById('sheet-overlay').classList.add('open')
+}
+function closeSheet() {
+    document.getElementById('sheet-overlay').classList.remove('open')
+}
+function populateEmployerDropdown() {
+  const select = document.getElementById('shift-employer')
+  select.innerHTML = '<option value="">None</option>'
+  employers.forEach(function(employer) {
+    const option = document.createElement('option')
+    option.value = employer.id
+    option.textContent = employer.name
+    select.appendChild(option)
+  })
+}
 
 window.addEventListener('resize', setAppHeight);
 window.addEventListener('orientationchange', setAppHeight);
@@ -103,6 +120,7 @@ tabButtons.forEach(function(button) {
         switchTab(button.getAttribute('data-tab'))
     })
 })
+document.getElementById('close-sheet').addEventListener('click', closeSheet)
 document.getElementById('prev-button').addEventListener('click', function() {
     currentMonth--
     if (currentMonth < 0 ) {
@@ -119,6 +137,25 @@ document.getElementById('next-button').addEventListener('click', function() {
     }
     renderCalendar()
 })
+document.querySelectorAll('input[name="rate-type"]').forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    const phOptions = document.getElementById('ph-options')
+    if (this.value === 'publicHoliday') {
+      phOptions.classList.remove('hidden')
+    } else {
+      phOptions.classList.add('hidden')
+    }
+  })
+})
+document.getElementById('ph-allday').addEventListener('change', function() {
+  const phHoursField = document.getElementById('ph-hours-field')
+  if (this.checked) {
+    phHoursField.classList.add('hidden')
+  } else {
+    phHoursField.classList.remove('hidden')
+  }
+})
+
 
 setAppHeight()
 // load the data first
@@ -126,3 +163,4 @@ loadShifts()
 loadEmployers()
 switchTab('active')
 renderCalendar()
+
